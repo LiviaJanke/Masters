@@ -1,0 +1,18 @@
+#call by make_slimcat_mod Slimcat_modell_output.txt RefTime
+
+Species=10		#NO2:10
+UpperSZA=96		#Obere SZA-Grenze fuer photochemische Korrekturtabelle
+LowerSZA=70		#Untere SZA-Grenze fuer photochemische Korrekturtabelle
+Abendflag=1		#1 fuer wachsenden, 0 fuer abnehmenden SZA
+RefTime=$2		#Zeit fuer Referenzprofil aus Slimcat-Output
+
+awk_dir=./	#Verzeichnis der AWK-Skripten
+
+#Suchen des Referenzprofils in Slimcat-Output
+gawk -f $awk_dir/concat_run323_all.awk $1 > $1_concated_all.txt
+gawk -v time=$RefTime -v species=$Species -f make_slimcat_ref.awk $1_concated_all.txt
+
+#Interpolation der Modelldaten aus Slimcat-Output und Erzeugen von .cth, .cts,.ctf 
+gawk -v abendflag=$Abendflag -f $awk_dir/concat_run323.awk $1 > $1_concated.txt
+gawk -v upperSZA=$UpperSZA -v lowerSZA=$LowerSZA -v getrow=$Species -f $awk_dir/make_slimcat_mod.awk $1_concated.txt 
+

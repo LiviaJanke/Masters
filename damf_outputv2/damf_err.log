@@ -1,0 +1,18 @@
+Ray Tracing : ON
+Atmosphäre : thermodynamisch
+Wellenlänge : 340SZW offset : 0.00...calculated index of refraction successfully for lambda = 340
+maximale Hoehe in .seg file : height_max = 80.00
+
+ Ozone sonde file outputv2.010 could not be found !!! 
+ Taking standard atmosphere in todamf.atm !!!
+Ray Tracing : ON
+Atmosphäre : thermodynamisch
+Wellenlänge : 340SZW offset : 0.00Ray Tracing : ON
+Atmosphäre : thermodynamisch
+Wellenlänge : 340SZW offset : 0.00...calculating obs.parm. from time-position-table 
+ n = 160 
+AMF Matrix inversion : mcond = 200, COND_FLAG = 0
+x=-2147483648, xd=12, scale_factor=1000000000000.000000, dummy=3.748174
+Ray Tracing : ON
+Atmosphäre : thermodynamisch
+Wellenlänge : 340SZW offset : 0.00

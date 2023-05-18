@@ -1,0 +1,24 @@
+#call by make_lagrange_mod Lagrange_modell_output.txt
+
+Species=7		#NO2:7
+UpperSZA=96		#Obere SZA-Grenze fuer photochemische Korrekturtabelle
+LowerSZA=70		#Untere SZA-Grenze fuer photochemische Korrekturtabelle
+UpperTime=71700         #Obere Zeit-Grenze fuer photochemische Korrekturtabelle  
+LowerTime=40800         #Untere Zeit-Grenze fuer photochemische Korrekturtabelle
+
+RefTime=55800		#Zeit fuer Referenzprofil aus Modell-Output
+awk_dir=/home/abutz/awks	        #Verzeichnis der AWK-Skripten
+
+
+
+gawk -v szamin=$LowerSZA -v szamax=$UpperSZA -v SPECIES=$Species -v timemin=$LowerTime -v timemax=$UpperTime -f $awk_dir/make_lagrange_mod.awk $1
+sort -ns <lagrange_modell.txt>tt
+rm lagrange_modell.txt
+cp tt todamf.mod
+rm tt
+
+gawk -v SPECIES=$Species -v timeref=$RefTime -f $awk_dir/make_lagrange_ref.awk $1
+
+echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+echo !!! This was make_damflagrange...              !!!
+echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
